@@ -16,6 +16,7 @@ library(tree)
 data = read.csv("DiamondsPrices2022.csv")
 data = subset(data, select = -X)
 View(data)
+set.seed(4940)
 
 ```
 
@@ -51,6 +52,7 @@ print(data.lm)
 
 #Graphs
 fmodel = data.lm$finalModel
+print(data.lm$finalModel)
 res = resid(fmodel)
 plot(fitted(fmodel), res)
 abline(0,0)
