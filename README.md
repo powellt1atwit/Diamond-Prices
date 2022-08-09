@@ -10,9 +10,9 @@ I began selecting the features to use in the model by creating a basic linear re
 Using the remaining features, I constructed a linear model using k-fold cross validation. I was able to get an R-squared value of 0.9160116, which represents that approximately 92% of the variance is explained by the model's inputs. Also, the model gave an RMSE () of 1156.737, which means the predicted price was on average $1156.74 off from the actual value, this doesn't appear very problematic because the prices are anywhere from the hundereds to ten-thousands, with more being in the thousands and ten thousands, so the distance is skewed by the larger prices. I also plotted a residual plot, this plot is somewhat concerning at the <8,000 fitted values where they seem to be grouped in the positive and trend towards the negative, however in the 8,000 - 20,000 range of fitted values the expected randomness is shown before the small amount of fitted values near 30,000 group up in the negative. This means that in certain ranges you could possible use one error to predict another, but the majority of fitted values you cannot. This could be do heteroscedasticity(), because of the large range of values in the predictors and the corresponding response. Lastly, I displayed Added-Variable Plots of each of the predictors to show the strength of their correlation with the response. Most of the predictors are shown to have a small negative or positive correlation while disregarding other predictors, but carat had a strong positive correlation with the predictor along with the clarity categories.
 
 ### Linear Model Equation
-$-4557.25 + 8895.19(carat) + 614.48(cutGood) + 877.66(cutIdeal) + 806.05(cutPremium) + 778.44(cutVeryGood) - 211.00(colorE) - 304.32(colorF) - 506.97(colorG) +
+-4557.25 + 8895.19(carat) + 614.48(cutGood) + 877.66(cutIdeal) + 806.05(cutPremium) + 778.44(cutVeryGood) - 211.00(colorE) - 304.32(colorF) - 506.97(colorG) +
 977.98(colorH) - 1438.28(colorI) - 2322.57(colorJ) + 5404.24(clarityIF) + 3567.75(claritySI1) + 2619.03(claritySI2) + 4525.42(clarityVS1) + 4210.14(clarityVS2) +
-5061.75(clarityVVS1) + 4957.33(clarityVVS2) + 21.00(depth) - 24.79(table)$
+5061.75(clarityVVS1) + 4957.33(clarityVVS2) + 21.00(depth) - 24.79(table)
 
 ## Pruned Tree
 
