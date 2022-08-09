@@ -1,0 +1,100 @@
+---
+title: "MATH4050-Final"
+author: "Thomas Powell"
+date: "2022-08-04"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(MASS)
+library(car)
+library(caret)
+library(tree)
+data = read.csv("DiamondsPrices2022.csv")
+data = subset(data, select = -X)
+View(data)
+
+```
+
+```{r}
+#Determine meaningful predictors
+data.lm = lm(price~., data = data)
+summary(data.lm)
+confint(data.lm)
+
+data = subset(data, select= -c(y,z))
+
+data.lm = lm(price~., data=data)
+summary(data.lm)
+confint(data.lm)
+
+#Determine co-linearity
+vif(data.lm)
+
+data = subset(data, select = -x)
+
+data.lm = lm(price~., data=data)
+summary(data.lm)
+confint(data.lm)
+vif(data.lm)
+
+View(data)
+
+#Apply k-fold cross validation to model
+ctrl = trainControl(method = "cv", number = 5)
+data.lm = train(price ~., data = data, method = "lm", trControl = ctrl)
+
+print(data.lm)
+
+#Graphs
+data.lm$finalModel
+avPlots(data.lm$finalModel)
+
+```
+
+```{r}
+#Encode categorical variables
+dmy = dummyVars(" ~.", data = data, fullRank = T)
+data.dmy = data.frame(predict(dmy, newdata = data))
+
+head(data.dmy)
+
+#Implement decision tree
+data.tree = tree(price ~., data = data.dmy)
+data.cvtree = cv.tree(data.tree)
+plot(data.cvtree$size, data.cvtree$dev, type = 'b')
+
+
+#Prune tree
+data.prune = prune.tree(data.tree, best = 5)
+plot(data.prune)
+text(data.prune, pretty = 0)
+
+#Find RMSE
+tree.estimate = predict(data.prune, newdata = data.dmy)
+MSE = mean((tree.estimate - data$price)^2)
+RMSE = sqrt(MSE)
+RMSE
+ggplot() + 
+    geom_point(aes(x = data.dmy$price, y = tree.estimate)) +
+    geom_abline()
+
+```
+
+```{r}
+#Create a Random Forest
+rf.model = train(price~., data = data, method = "ranger", trControl = ctrl, importance = "impurity")
+rf.model
+plot(rf.model)
+
+```
+
+
+
+
+
+
+
