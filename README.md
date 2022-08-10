@@ -26,10 +26,17 @@ Based on the implementation of the three regression models, I have come to the c
 
 ## Appendex
 1 - There is no significant difference between specified populations, any observed difference being due to sampling or experimental error
+
 2 - Independent variables in a model are correlated
+
 3 - Cross-validation is a resampling procedure used to evaluate machine learning models on a limited data sample. The procedure has a single parameter called k that       refers to the number of groups that a given data sample is to be split into. K = 5
-4 - Root Mean Square Error is the standard deviation of the residuals (prediction errors).
+
+4 - Root Mean Square Error is the standard deviation of the residuals (prediction errors)
+
 5 - The standard deviations of a predicted variable, monitored over different values of an independent variable or as related to prior time periods, are non-constant
+
 6 - The number of variables randomly sampled as candidates at each split
+
 7 - Cut-point choice while splitting a tree node
+
 8 - The property of a model that the variance of the parameter estimated across samples can be reduced by increasing the bias in the estimated parameters
