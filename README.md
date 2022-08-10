@@ -15,4 +15,5 @@ Using the remaining features, I constructed a linear model using k-fold cross va
 5061.75(clarityVVS1) + 4957.33(clarityVVS2) + 21.00(depth) - 24.79(table)
 
 ## Pruned Tree
-
+In order to use a decision tree on my data, I had to implement encoding () in order to turn all of the categorical predictors into numerical predictors because the decision tree model doesn't accept categorical predictors. I did this by adding a binary column for every unique categorical value in place of the categorical columns. 
+After encoding, we 
